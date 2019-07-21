@@ -1,0 +1,27 @@
+import numpy as np
+
+class NearestNeighbor:
+    def __init__(self):
+        pass
+
+    def train(self, X, y):
+        """ X 是N x D的矩阵，N是样本数，Y是长度为N的向量"""
+        '最邻近算法只是简单的记住所有的训练集数据'
+        self.Xtr = X
+        self.ytr = y
+
+    def predict(self, X):
+        """X每一行都是希望被预测的样本"""
+        num_test = X.shape[0]
+        #使输入与输出格式相同
+        Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
+
+        #循环一遍要预测的数据集
+        for i in xrange(num_text):
+            #计算与所有训练集样本的L1距离 这里使用了广播
+            distance = np.sum(np.abs(self.Xtr - X[i,:],axis = 1))
+            min_index = np.argmin(distances) # 获得L1距离最小的index值
+            Ypred[1] = self.ytr[min_index] # 获得预测的标签值
+        
+        return Ypred
+    
